@@ -1,0 +1,21 @@
+version: "3"
+
+vars:
+  RESOURCE_GROUP_NAME: web-fastapi-aca-rg
+
+tasks:
+  build:
+    cmds:
+    - docker build --tag fastapi-demo .
+  up:
+    cmds:
+    - docker compose up
+  login:
+    cmds:
+    - az login --use-device-code
+  deploy:
+    cmds:
+    - az containerapp up --resource-group {{.RESOURCE_GROUP_NAME}} --name web-aca-app --ingress external --target-port 80 --source .
+  delete:
+    cmds:
+    - az group delete --name {{.RESOURCE_GROUP_NAME}}

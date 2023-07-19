@@ -1,0 +1,6 @@
+version: "3"
+services:
+  fastapi:
+    image: fastapi-demo
+    ports:
+      - 3100:3100
